@@ -1,5 +1,7 @@
 import streamlit as st 
 import pandas as pd
+import requests
+import tempfile
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -61,8 +63,22 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 </style>""", unsafe_allow_html=True)
 
 # Constants
-LOGO_PATH = r"https://raw.githubusercontent.com/Jai-Sorout-01/Mitigation-Report-Generator-Tool-SoD/6aca02bf02b62723c685f077a316b39d43cd0f7e/victura_logo.png"
+LOGO_URL = "https://raw.githubusercontent.com/Jai-Sorout-01/Mitigation-Report-Generator-Tool-SoD/6aca02bf02b62723c685f077a316b39d43cd0f7e/victura_logo.png"
+@st.cache_resource(show_spinner=False)
+def load_logo_from_github():
+    try:
+        response = requests.get(LOGO_URL, timeout=15)
+        response.raise_for_status()
 
+        temp_logo_path = os.path.join(tempfile.gettempdir(), "victura_logo.png")
+        with open(temp_logo_path, "wb") as f:
+            f.write(response.content)
+
+        return temp_logo_path
+    except Exception as e:
+        st.error(f"Logo download failed: {e}")
+        return None
+LOGO_PATH = load_logo_from_github()
 
 # Core standard columns for matching (unchanged)
 CORE_STANDARD_COLUMNS = {
@@ -314,7 +330,7 @@ def add_logo_to_header(section, logo_path):
     header_para.alignment = WD_ALIGN_PARAGRAPH.LEFT
     run = header_para.add_run()
     try:
-        if logo_path and os.path.exists(logo_path):
+        if LOGO_PATH and os.path.exists(LOGO_PATH):
             run.add_picture(logo_path, width=Inches(1.5))
         else:
             header_para.text = "VICTURA TECHNOLOGIES"
@@ -436,7 +452,7 @@ with st.sidebar:
     st.header("📁 Risk Master Data")
     
     # Logo status
-    if os.path.exists(LOGO_PATH):
+    if LOGO_PATH and os.path.exists(LOGO_PATH):
         st.success("✅ Company Logo Loaded")
         try:
             st.image(LOGO_PATH, width=150)
@@ -765,6 +781,7 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
 
