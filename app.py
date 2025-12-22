@@ -61,7 +61,7 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 </style>""", unsafe_allow_html=True)
 
 # Constants
-LOGO_PATH = r"C:\Users\Jai Sorout\Downloads\Victura Logo.png"
+LOGO_PATH = r"https://github.com/Jai-Sorout-01/Mitigation-Report-Generator-Tool-SoD/blob/a69f3ebaf73f8b5390e98341bb4a330474229ac6/Victura%20Logo.png"
 
 # Core standard columns for matching (unchanged)
 CORE_STANDARD_COLUMNS = {
@@ -764,3 +764,4 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
