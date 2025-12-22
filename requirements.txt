@@ -4,5 +4,3 @@ numpy
 openpyxl
 python-docx
 requests
-tempfile
-os
