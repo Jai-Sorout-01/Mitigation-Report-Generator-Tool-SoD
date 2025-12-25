@@ -14,164 +14,147 @@ import os
 st.set_page_config(page_title="Victura Technologies - SAP GRC", layout="wide", page_icon="🔐")
 
 # Victura CSS - FIXED VERSION
-st.markdown("""<style>
+st.markdown("""
+<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
-/* Base styles */
+/* =====================
+   BASE
+   ===================== */
 * {
     font-family: 'Inter', sans-serif !important;
 }
 
-.main {
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #4c1d95 100%);
-    padding: 2rem;
-}
-
 .stApp {
-    background: transparent;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #4c1d95 100%);
 }
 
-/* =========================
-   FILE UPLOADER
-   ========================= */
+/* =====================
+   HEADER (UNCHANGED BRAND)
+   ===================== */
+.victura-header {
+    background: transparent;
+    margin-bottom: 1rem;
+}
 
+.victura-logo-text {
+    color: white;
+    font-weight: 800;
+}
+
+.victura-tagline,
+.victura-subtitle {
+    color: #e5e7eb;
+}
+
+/* =====================
+   FILE UPLOADER (FIXED)
+   ===================== */
 div[data-testid="stFileUploader"] {
     background: white;
     padding: 1.8rem;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-radius: 14px;
     border: 3px solid #1e3a8a;
 }
 
 div[data-testid="stFileUploader"] * {
     font-size: 0.95rem !important;
-    line-height: 1.5 !important;
+    line-height: 1.45 !important;
     white-space: normal !important;
     word-break: break-word !important;
 }
 
-/* Uploaded filename */
+/* uploaded filename */
 .uploadedFileName {
     display: block !important;
     white-space: normal !important;
     word-break: break-word !important;
-    margin-top: 0.5rem !important;
 }
 
-/* =========================
-   TABS & CONTENT
-   ========================= */
-
+/* =====================
+   TABS
+   ===================== */
 .stTabs [data-baseweb="tab-list"] {
-    gap: 1.5rem;
     background: white;
-    padding: 1.8rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    padding: 1.4rem;
+    border-radius: 14px;
+    gap: 1.2rem;
 }
 
 .stTabs [data-baseweb="tab"] {
-    height: 60px;
+    height: 56px;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 0 2.4rem;
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
     color: white;
     border-radius: 12px;
-    padding: 0 3rem;
-    font-weight: 700;
-    font-size: 16px;
 }
 
-.stTabs [data-testid="stVerticalBlock"] p,
-.stTabs [data-testid="stVerticalBlock"] span,
-.stTabs [data-testid="stVerticalBlock"] label {
-    font-size: 0.9rem !important;
-    line-height: 1.6 !important;
-    font-weight: 500 !important;
-}
-
-/* =========================
-   METRICS
-   ========================= */
-
+/* =====================
+   METRICS (NO OVERLAP)
+   ===================== */
 .stMetric {
     background: white;
-    padding: 1.6rem;
-    border-radius: 15px;
-    min-height: 120px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    padding: 1.4rem;
+    min-height: 115px;
+    border-radius: 14px;
     border-left: 6px solid #1e3a8a;
 }
 
 .stMetric label {
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
 }
 
 .stMetric div[data-testid="stMetricValue"] {
-    font-size: 1.4rem !important;
+    font-size: 1.35rem !important;
     margin-top: 0.4rem;
 }
 
-/* =========================
-   DATAFRAME
-   ========================= */
-
+/* =====================
+   DATAFRAME (BULK TAB)
+   ===================== */
 div[data-testid="stDataFrame"] th,
 div[data-testid="stDataFrame"] td {
     font-size: 0.85rem !important;
-    padding: 0.5rem !important;
+    padding: 0.45rem !important;
     white-space: normal !important;
     word-break: break-word !important;
 }
 
-/* =========================
+/* =====================
    EXPANDERS
-   ========================= */
-
+   ===================== */
 .stExpander p,
 .stExpander span,
 .stExpander label {
     font-size: 0.9rem !important;
-    line-height: 1.6 !important;
+    line-height: 1.55 !important;
 }
 
-/* =========================
+/* =====================
    SIDEBAR
-   ========================= */
-
+   ===================== */
 section[data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0f172a, #1e3a8a);
 }
 
 section[data-testid="stSidebar"] p {
+    color: #e5e7eb !important;
     font-size: 0.9rem !important;
-    color: #e2e8f0 !important;
 }
 
-/* =========================
+/* =====================
    FOOTER
-   ========================= */
-
+   ===================== */
 .victura-footer p,
 .victura-footer li {
     font-size: 0.95rem;
     line-height: 1.6;
 }
+</style>
+""", unsafe_allow_html=True)
 
-/* =========================================================
-   === BULK UPLOAD POST-UPLOAD OVERLAP FIX (ADDED) ===
-   This ONLY affects text shown AFTER Excel is uploaded
-   ========================================================= */
-
-div[data-testid="stFileUploader"] span,
-div[data-testid="stFileUploader"] p {
-    white-space: normal !important;
-    line-height: 1.4 !important;
-}
-
-.stMetric {
-    min-height: 110px !important;
-}
-
-</style>""", unsafe_allow_html=True)
 
 # -------------------------
 # REST OF YOUR CODE
@@ -878,5 +861,6 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
