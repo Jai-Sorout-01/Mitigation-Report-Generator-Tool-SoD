@@ -62,23 +62,7 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 .victura-footer strong{color:#1e3a8a;font-weight:700}
 </style>""", unsafe_allow_html=True)
 
-# Constants
-LOGO_URL = "https://raw.githubusercontent.com/Jai-Sorout-01/Mitigation-Report-Generator-Tool-SoD/6aca02bf02b62723c685f077a316b39d43cd0f7e/victura_logo.png"
-@st.cache_resource(show_spinner=False)
-def load_logo_from_github():
-    try:
-        response = requests.get(LOGO_URL, timeout=15)
-        response.raise_for_status()
-
-        temp_logo_path = os.path.join(tempfile.gettempdir(), "victura_logo.png")
-        with open(temp_logo_path, "wb") as f:
-            f.write(response.content)
-
-        return temp_logo_path
-    except Exception as e:
-        st.error(f"Logo download failed: {e}")
-        return None
-LOGO_PATH = load_logo_from_github()
+LOGO_PATH = "victura_logo.png"
 
 # Core standard columns for matching (unchanged)
 CORE_STANDARD_COLUMNS = {
@@ -330,7 +314,7 @@ def add_logo_to_header(section, logo_path):
     header_para.alignment = WD_ALIGN_PARAGRAPH.LEFT
     run = header_para.add_run()
     try:
-        if LOGO_PATH and os.path.exists(LOGO_PATH):
+        if logo_path and os.path.exists(logo_path):
             run.add_picture(logo_path, width=Inches(1.5))
         else:
             header_para.text = "VICTURA TECHNOLOGIES"
@@ -450,16 +434,14 @@ st.markdown('''<div class="victura-header">
 # Sidebar (unchanged functionality, small additions)
 with st.sidebar:
     st.header("📁 Risk Master Data")
-    
-    # Logo status
-if LOGO_PATH and os.path.exists(LOGO_PATH):
-    st.success("✅ Company Logo Loaded")
-    st.image(LOGO_PATH, width=150)
-else:
-    st.warning("⚠️ Logo not found at configured path")
-    st.code(f"LOGO_PATH = {LOGO_PATH}")
 
-    
+    if LOGO_PATH and os.path.exists(LOGO_PATH):
+        st.success("✅ Company Logo Loaded")
+        st.image(LOGO_PATH, width=150)
+    else:
+        st.warning("⚠️ Logo not found")
+        st.code(f"LOGO_PATH = {LOGO_PATH}")
+
     risk_file = st.file_uploader("Upload Risk Master Excel", type=['xlsx', 'xls'])
     if risk_file:
         try:
@@ -779,6 +761,7 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
 
