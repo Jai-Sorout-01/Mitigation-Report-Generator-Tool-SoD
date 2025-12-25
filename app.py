@@ -31,59 +31,37 @@ st.markdown("""<style>
     background: transparent;
 }
 
-/* File Uploader - FIXED OVERLAPPING */
+/* =========================
+   FILE UPLOADER (FIXED)
+   ========================= */
+
 div[data-testid="stFileUploader"] {
     background: white;
     padding: 1.8rem;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     border: 3px solid #1e3a8a;
-    transition: all 0.3s;
 }
 
-div[data-testid="stFileUploader"]:hover {
-    border-color: #4c1d95;
-    box-shadow: 0 15px 40px rgba(76,29,149,0.3);
-    transform: translateY(-2px);
-}
-
-/* File Uploader Text - FIXED SIZES */
-div[data-testid="stFileUploader"] label,
-div[data-testid="stFileUploader"] span,
-div[data-testid="stFileUploader"] p,
-section[data-testid="stFileUploadDropzone"],
-section[data-testid="stFileUploadDropzone"] span,
-section[data-testid="stFileUploadDropzone"] small,
-[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p {
-    color: #000000 !important;
-    font-weight: 600 !important;
+div[data-testid="stFileUploader"] * {
     font-size: 0.95rem !important;
-    line-height: 1.4 !important;
+    line-height: 1.5 !important;
     white-space: normal !important;
-    word-wrap: break-word !important;
+    word-break: break-word !important;
 }
 
-div[data-testid="stFileUploader"] small {
-    color: #1e3a8a !important;
-    font-weight: 500 !important;
-    font-size: 0.85rem !important;
-}
-
-/* Sidebar File Uploader */
-section[data-testid="stSidebar"] div[data-testid="stFileUploader"] *,
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] * {
-    color: #000000 !important;
-    font-size: 0.9rem !important;
-    font-weight: 600 !important;
-}
-
+/* Uploaded filename fix */
 .uploadedFileName {
-    color: #000000 !important;
-    font-weight: 600 !important;
-    font-size: 0.9rem !important;
+    display: block !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    margin-top: 0.5rem !important;
 }
 
-/* Tabs */
+/* =========================
+   TABS & CONTENT (SAFE)
+   ========================= */
+
 .stTabs [data-baseweb="tab-list"] {
     gap: 1.5rem;
     background: white;
@@ -99,247 +77,83 @@ section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] * {
     border-radius: 12px;
     padding: 0 3rem;
     font-weight: 700;
-    font-size: 17px;
-    transition: all 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: 16px;
 }
 
-.stTabs [data-baseweb="tab"]:hover {
-    background: linear-gradient(135deg, #4c1d95, #7c3aed);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(76,29,149,0.4);
-}
-
-.stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, #4c1d95, #7c3aed);
-    box-shadow: 0 8px 25px rgba(76,29,149,0.5);
-}
-
-/* Tab Content - FIXED OVERLAPPING */
+/* ⚠️ IMPORTANT FIX:
+   Removed `div` from selector */
 .stTabs [data-testid="stVerticalBlock"] p,
 .stTabs [data-testid="stVerticalBlock"] span,
-.stTabs [data-testid="stVerticalBlock"] label,
-.stTabs [data-testid="stVerticalBlock"] div {
+.stTabs [data-testid="stVerticalBlock"] label {
     font-size: 0.9rem !important;
     line-height: 1.6 !important;
     font-weight: 500 !important;
 }
 
-/* Headers */
-h1, h2, h3 {
-    color: white !important;
-    text-shadow: 3px 3px 10px rgba(0,0,0,0.4);
-    font-weight: 800;
-    margin-bottom: 1rem !important;
-}
+/* =========================
+   METRICS (NO OVERLAP)
+   ========================= */
 
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 {
-    color: white !important;
-}
-
-.stTabs [data-testid="stVerticalBlock"] h2 {
-    color: #0f172a !important;
-    text-shadow: none !important;
-    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
-    border-left: 6px solid #1e3a8a;
-}
-
-.main h1 {
-    color: white !important;
-}
-
-/* Buttons */
-.stButton button {
-    background: linear-gradient(135deg, #4c1d95, #7c3aed);
-    color: white;
-    font-weight: 700;
-    padding: 1rem 3rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(76,29,149,0.4);
-    font-size: 17px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    transition: all 0.3s;
-}
-
-.stButton button:hover {
-    background: linear-gradient(135deg, #6d28d9, #8b5cf6);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(76,29,149,0.5);
-}
-
-/* Victura Header */
-.victura-header {
-    background: linear-gradient(135deg, #fff, #f1f5f9);
-    padding: 3rem;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    margin-bottom: 2.5rem;
-    border: 4px solid #1e3a8a;
-    position: relative;
-    overflow: hidden;
-}
-
-.victura-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 8px;
-    background: linear-gradient(90deg, #0f172a, #1e3a8a 33%, #4c1d95 66%, #7c3aed);
-}
-
-.victura-logo-text {
-    font-size: 3.5rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #0f172a, #1e3a8a 50%, #4c1d95);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin: 0;
-    letter-spacing: -2px;
-    text-shadow: none;
-}
-
-.victura-tagline {
-    color: #1e3a8a;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-top: .8rem;
-    text-shadow: none;
-}
-
-.victura-subtitle {
-    color: #64748b;
-    font-size: 1.1rem;
-    margin-top: .5rem;
-    font-weight: 500;
-}
-
-/* Metrics */
 .stMetric {
     background: white;
-    padding: 1.8rem;
+    padding: 1.6rem;
     border-radius: 15px;
+    min-height: 120px;   /* KEY FIX */
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     border-left: 6px solid #1e3a8a;
 }
 
 .stMetric label {
     font-size: 0.9rem !important;
-    font-weight: 600 !important;
 }
 
 .stMetric div[data-testid="stMetricValue"] {
     font-size: 1.4rem !important;
-    font-weight: 700 !important;
+    margin-top: 0.4rem;
 }
 
-/* Sidebar */
-section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0f172a, #1e3a8a);
+/* =========================
+   DATAFRAME (BULK TAB)
+   ========================= */
+
+div[data-testid="stDataFrame"] th,
+div[data-testid="stDataFrame"] td {
+    font-size: 0.85rem !important;
+    padding: 0.5rem !important;
+    white-space: normal !important;   /* FIX */
+    word-break: break-word !important;
 }
 
-section[data-testid="stSidebar"] h2 {
-    color: white !important;
-    font-weight: 800;
-}
+/* =========================
+   EXPANDERS
+   ========================= */
 
-section[data-testid="stSidebar"] .stImage {
-    background: white;
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(255,255,255,0.1);
-}
-
-section[data-testid="stSidebar"] .stSuccess {
-    background: rgba(34,197,94,0.15);
-    border-left: 4px solid #22c55e;
-}
-
-section[data-testid="stSidebar"] .stWarning {
-    background: rgba(251,191,36,0.15);
-    border-left: 4px solid #fbbf24;
-}
-
-section[data-testid="stSidebar"] .stInfo {
-    background: rgba(59,130,246,0.15);
-    border-left: 4px solid #3b82f6;
-}
-
-section[data-testid="stSidebar"] p {
-    color: #e2e8f0 !important;
-    font-size: 0.9rem !important;
-}
-
-/* Text Input */
-.stTextInput input,
-.stTextArea textarea {
-    border-radius: 10px;
-    border: 2.5px solid #cbd5e1;
-    padding: .9rem;
-    font-weight: 500;
-    font-size: 0.95rem !important;
-    transition: all 0.3s;
-}
-
-.stTextInput input:focus,
-.stTextArea textarea:focus {
-    border-color: #1e3a8a;
-    box-shadow: 0 0 0 4px rgba(30,58,138,0.15);
-}
-
-/* Expander - FIXED OVERLAPPING */
 .stExpander p,
 .stExpander span,
 .stExpander label {
     font-size: 0.9rem !important;
     line-height: 1.6 !important;
-    font-weight: 500 !important;
 }
 
-/* Dataframe */
-div[data-testid="stDataFrame"] th,
-div[data-testid="stDataFrame"] td {
-    font-size: 0.85rem !important;
-    white-space: nowrap;
-    padding: 0.5rem !important;
+/* =========================
+   SIDEBAR
+   ========================= */
+
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #0f172a, #1e3a8a);
 }
 
-/* Footer */
-.victura-footer {
-    background: white;
-    padding: 3rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    margin-top: 3rem;
-    border-top: 6px solid #1e3a8a;
+section[data-testid="stSidebar"] p {
+    font-size: 0.9rem !important;
+    color: #e2e8f0 !important;
 }
 
-.victura-footer h3 {
-    color: #0f172a !important;
-    text-shadow: none;
-    font-weight: 800;
-}
+/* =========================
+   FOOTER
+   ========================= */
 
-.victura-footer ul,
-.victura-footer ol {
-    color: #334155;
-    line-height: 1.8;
-    font-size: 0.95rem;
-}
-
-.victura-footer strong {
-    color: #1e3a8a;
-    font-weight: 700;
-}
-
-.victura-footer p {
+.victura-footer p,
+.victura-footer li {
     font-size: 0.95rem;
     line-height: 1.6;
 }
@@ -1045,3 +859,4 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
