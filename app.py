@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 import streamlit as st 
 import pandas as pd
-import requests
-import tempfile
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -13,156 +10,58 @@ import os
 
 st.set_page_config(page_title="Victura Technologies - SAP GRC", layout="wide", page_icon="🔐")
 
-# Victura CSS - FIXED VERSION
-st.markdown("""
-<style>
+# Victura CSS (unchanged - interface colors and design preserved)
+st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+*{font-family:'Inter',sans-serif!important}
+.main{background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 50%,#4c1d95 100%);padding:2rem}
+.stApp{background:transparent}
+div[data-testid="stFileUploader"]{background:white;padding:1.8rem;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.2);border:3px solid #1e3a8a;transition:all 0.3s}
+div[data-testid="stFileUploader"]:hover{border-color:#4c1d95;box-shadow:0 15px 40px rgba(76,29,149,0.3);transform:translateY(-2px)}
+div[data-testid="stFileUploader"] label,
+div[data-testid="stFileUploader"] span,
+div[data-testid="stFileUploader"] p,
+section[data-testid="stFileUploadDropzone"],
+section[data-testid="stFileUploadDropzone"] span,
+section[data-testid="stFileUploadDropzone"] small,
+[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p{color:#000000!important;font-weight:800!important;font-size:1.15rem!important}
+div[data-testid="stFileUploader"] small{color:#1e3a8a!important;font-weight:600!important}
+section[data-testid="stSidebar"] div[data-testid="stFileUploader"] *{color:#000000!important}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] *{color:#000000!important}
+.uploadedFileName{color:#000000!important;font-weight:700!important}
+.stTabs [data-baseweb="tab-list"]{gap:1.5rem;background:white;padding:1.8rem;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15)}
+.stTabs [data-baseweb="tab"]{height:60px;background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:white;border-radius:12px;padding:0 3rem;font-weight:700;font-size:17px;transition:all 0.3s;text-transform:uppercase;letter-spacing:1px}
+.stTabs [data-baseweb="tab"]:hover{background:linear-gradient(135deg,#4c1d95,#7c3aed);transform:translateY(-3px);box-shadow:0 8px 20px rgba(76,29,149,0.4)}
+.stTabs [aria-selected="true"]{background:linear-gradient(135deg,#4c1d95,#7c3aed);box-shadow:0 8px 25px rgba(76,29,149,0.5)}
+h1,h2,h3{color:white!important;text-shadow:3px 3px 10px rgba(0,0,0,0.4);font-weight:800}
+section[data-testid="stSidebar"] h2,section[data-testid="stSidebar"] h3{color:white!important}
+.stTabs [data-testid="stVerticalBlock"] h2{color:#0f172a!important;text-shadow:none!important;background:linear-gradient(135deg,#f8fafc,#e2e8f0);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;border-left:6px solid #1e3a8a}
+.main h1{color:white!important}
+.stButton button{background:linear-gradient(135deg,#4c1d95,#7c3aed);color:white;font-weight:700;padding:1rem 3rem;border-radius:12px;box-shadow:0 8px 20px rgba(76,29,149,0.4);font-size:17px;text-transform:uppercase;letter-spacing:1.5px;transition:all 0.3s}
+.stButton button:hover{background:linear-gradient(135deg,#6d28d9,#8b5cf6);transform:translateY(-4px);box-shadow:0 12px 30px rgba(76,29,149,0.5)}
+.victura-header{background:linear-gradient(135deg,#fff,#f1f5f9);padding:3rem;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,0.2);margin-bottom:2.5rem;border:4px solid #1e3a8a;position:relative;overflow:hidden}
+.victura-header::before{content:'';position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(90deg,#0f172a,#1e3a8a 33%,#4c1d95 66%,#7c3aed)}
+.victura-logo-text{font-size:3.5rem;font-weight:900;background:linear-gradient(135deg,#0f172a,#1e3a8a 50%,#4c1d95);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0;letter-spacing:-2px;text-shadow:none}
+.victura-tagline{color:#1e3a8a;font-size:1.4rem;font-weight:700;margin-top:.8rem;text-shadow:none}
+.victura-subtitle{color:#64748b;font-size:1.1rem;margin-top:.5rem;font-weight:500}
+.stMetric{background:white;padding:1.8rem;border-radius:15px;box-shadow:0 6px 20px rgba(0,0,0,0.12);border-left:6px solid #1e3a8a}
+section[data-testid="stSidebar"]{background:linear-gradient(180deg,#0f172a,#1e3a8a)}
+section[data-testid="stSidebar"] h2{color:white!important;font-weight:800}
+section[data-testid="stSidebar"] .stImage{background:white;padding:1rem;border-radius:12px;box-shadow:0 4px 15px rgba(255,255,255,0.1)}
+section[data-testid="stSidebar"] .stSuccess{background:rgba(34,197,94,0.15);border-left:4px solid #22c55e}
+section[data-testid="stSidebar"] .stWarning{background:rgba(251,191,36,0.15);border-left:4px solid #fbbf24}
+section[data-testid="stSidebar"] .stInfo{background:rgba(59,130,246,0.15);border-left:4px solid #3b82f6}
+section[data-testid="stSidebar"] p{color:#e2e8f0!important}
+.stTextInput input{border-radius:10px;border:2.5px solid #cbd5e1;padding:.9rem;font-weight:500;transition:all 0.3s}
+.stTextInput input:focus{border-color:#1e3a8a;box-shadow:0 0 0 4px rgba(30,58,138,0.15)}
+.victura-footer{background:white;padding:3rem;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.15);margin-top:3rem;border-top:6px solid #1e3a8a}
+.victura-footer h3{color:#0f172a!important;text-shadow:none;font-weight:800}
+.victura-footer ul,.victura-footer ol{color:#334155;line-height:1.8}
+.victura-footer strong{color:#1e3a8a;font-weight:700}
+</style>""", unsafe_allow_html=True)
 
-/* =====================
-   BASE
-   ===================== */
-* {
-    font-family: 'Inter', sans-serif !important;
-}
-
-.stApp {
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #4c1d95 100%);
-}
-
-/* =====================
-   HEADER (UNCHANGED BRAND)
-   ===================== */
-.victura-header {
-    background: transparent;
-    margin-bottom: 1rem;
-}
-
-.victura-logo-text {
-    color: white;
-    font-weight: 800;
-}
-
-.victura-tagline,
-.victura-subtitle {
-    color: #e5e7eb;
-}
-
-/* =====================
-   FILE UPLOADER (FIXED)
-   ===================== */
-div[data-testid="stFileUploader"] {
-    background: white;
-    padding: 1.8rem;
-    border-radius: 14px;
-    border: 3px solid #1e3a8a;
-}
-
-div[data-testid="stFileUploader"] * {
-    font-size: 0.95rem !important;
-    line-height: 1.45 !important;
-    white-space: normal !important;
-    word-break: break-word !important;
-}
-
-/* uploaded filename */
-.uploadedFileName {
-    display: block !important;
-    white-space: normal !important;
-    word-break: break-word !important;
-}
-
-/* =====================
-   TABS
-   ===================== */
-.stTabs [data-baseweb="tab-list"] {
-    background: white;
-    padding: 1.4rem;
-    border-radius: 14px;
-    gap: 1.2rem;
-}
-
-.stTabs [data-baseweb="tab"] {
-    height: 56px;
-    font-size: 15px;
-    font-weight: 700;
-    padding: 0 2.4rem;
-    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-    color: white;
-    border-radius: 12px;
-}
-
-/* =====================
-   METRICS (NO OVERLAP)
-   ===================== */
-.stMetric {
-    background: white;
-    padding: 1.4rem;
-    min-height: 115px;
-    border-radius: 14px;
-    border-left: 6px solid #1e3a8a;
-}
-
-.stMetric label {
-    font-size: 0.85rem !important;
-}
-
-.stMetric div[data-testid="stMetricValue"] {
-    font-size: 1.35rem !important;
-    margin-top: 0.4rem;
-}
-
-/* =====================
-   DATAFRAME (BULK TAB)
-   ===================== */
-div[data-testid="stDataFrame"] th,
-div[data-testid="stDataFrame"] td {
-    font-size: 0.85rem !important;
-    padding: 0.45rem !important;
-    white-space: normal !important;
-    word-break: break-word !important;
-}
-
-/* =====================
-   EXPANDERS
-   ===================== */
-.stExpander p,
-.stExpander span,
-.stExpander label {
-    font-size: 0.9rem !important;
-    line-height: 1.55 !important;
-}
-
-/* =====================
-   SIDEBAR
-   ===================== */
-section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #0f172a, #1e3a8a);
-}
-
-section[data-testid="stSidebar"] p {
-    color: #e5e7eb !important;
-    font-size: 0.9rem !important;
-}
-
-/* =====================
-   FOOTER
-   ===================== */
-.victura-footer p,
-.victura-footer li {
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-</style>
-""", unsafe_allow_html=True)
-
-
-# -------------------------
-# REST OF YOUR CODE
-# -------------------------
-# (UNCHANGED — logic, UI, reports, matching, footer etc.)
-
-
-LOGO_PATH = "victura_logo.png"
+# Constants
+LOGO_PATH = r"C:\Users\Jai Sorout\Downloads\Victura Logo.png"
 
 # Core standard columns for matching (unchanged)
 CORE_STANDARD_COLUMNS = {
@@ -534,14 +433,18 @@ st.markdown('''<div class="victura-header">
 # Sidebar (unchanged functionality, small additions)
 with st.sidebar:
     st.header("📁 Risk Master Data")
-
-    if LOGO_PATH and os.path.exists(LOGO_PATH):
+    
+    # Logo status
+    if os.path.exists(LOGO_PATH):
         st.success("✅ Company Logo Loaded")
-        st.image(LOGO_PATH, width=150)
+        try:
+            st.image(LOGO_PATH, width=150)
+        except:
+            st.info("Logo path configured")
     else:
-        st.warning("⚠️ Logo not found")
-        st.code(f"LOGO_PATH = {LOGO_PATH}")
-
+        st.warning("⚠️ Logo not found at configured path")
+        st.code(LOGO_PATH, language="text")
+    
     risk_file = st.file_uploader("Upload Risk Master Excel", type=['xlsx', 'xls'])
     if risk_file:
         try:
@@ -854,13 +757,10 @@ st.markdown("""<div class="victura-footer">
 <li><strong>Dynamic Forms</strong>: Manual entry adapts to required compact fields while keeping interface design</li>
 <li><strong>Duplicate Prevention</strong>: Automatic duplicate column removal</li>
 <li><strong>High Performance</strong>: Optimized for large datasets</li>
-<li><strong>Professional Reports</strong>: Branded Word docs with company logo on every page (if configured)</li>
+<li><strong>Professional Reports</strong>: Branded Word docs with company logo on every page (if configured)
 </ul>
 <div style="margin-top:2rem;text-align:center;padding-top:2rem;border-top:2px solid #e2e8f0">
 <p style="color:#0f172a;font-weight:800;font-size:1.2rem;margin:0">VICTURA TECHNOLOGIES</p>
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
-
-
-
