@@ -32,7 +32,7 @@ st.markdown("""<style>
 }
 
 /* =========================
-   FILE UPLOADER (FIXED)
+   FILE UPLOADER
    ========================= */
 
 div[data-testid="stFileUploader"] {
@@ -50,7 +50,7 @@ div[data-testid="stFileUploader"] * {
     word-break: break-word !important;
 }
 
-/* Uploaded filename fix */
+/* Uploaded filename */
 .uploadedFileName {
     display: block !important;
     white-space: normal !important;
@@ -59,7 +59,7 @@ div[data-testid="stFileUploader"] * {
 }
 
 /* =========================
-   TABS & CONTENT (SAFE)
+   TABS & CONTENT
    ========================= */
 
 .stTabs [data-baseweb="tab-list"] {
@@ -80,8 +80,6 @@ div[data-testid="stFileUploader"] * {
     font-size: 16px;
 }
 
-/* ⚠️ IMPORTANT FIX:
-   Removed `div` from selector */
 .stTabs [data-testid="stVerticalBlock"] p,
 .stTabs [data-testid="stVerticalBlock"] span,
 .stTabs [data-testid="stVerticalBlock"] label {
@@ -91,14 +89,14 @@ div[data-testid="stFileUploader"] * {
 }
 
 /* =========================
-   METRICS (NO OVERLAP)
+   METRICS
    ========================= */
 
 .stMetric {
     background: white;
     padding: 1.6rem;
     border-radius: 15px;
-    min-height: 120px;   /* KEY FIX */
+    min-height: 120px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     border-left: 6px solid #1e3a8a;
 }
@@ -113,14 +111,14 @@ div[data-testid="stFileUploader"] * {
 }
 
 /* =========================
-   DATAFRAME (BULK TAB)
+   DATAFRAME
    ========================= */
 
 div[data-testid="stDataFrame"] th,
 div[data-testid="stDataFrame"] td {
     font-size: 0.85rem !important;
     padding: 0.5rem !important;
-    white-space: normal !important;   /* FIX */
+    white-space: normal !important;
     word-break: break-word !important;
 }
 
@@ -158,7 +156,28 @@ section[data-testid="stSidebar"] p {
     line-height: 1.6;
 }
 
+/* =========================================================
+   === BULK UPLOAD POST-UPLOAD OVERLAP FIX (ADDED) ===
+   This ONLY affects text shown AFTER Excel is uploaded
+   ========================================================= */
+
+div[data-testid="stFileUploader"] span,
+div[data-testid="stFileUploader"] p {
+    white-space: normal !important;
+    line-height: 1.4 !important;
+}
+
+.stMetric {
+    min-height: 110px !important;
+}
+
 </style>""", unsafe_allow_html=True)
+
+# -------------------------
+# REST OF YOUR CODE
+# -------------------------
+# (UNCHANGED — logic, UI, reports, matching, footer etc.)
+
 
 LOGO_PATH = "victura_logo.png"
 
@@ -859,4 +878,5 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
