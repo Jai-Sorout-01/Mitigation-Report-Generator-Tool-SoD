@@ -60,6 +60,44 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 .victura-footer h3{color:#0f172a!important;text-shadow:none;font-weight:800}
 .victura-footer ul,.victura-footer ol{color:#334155;line-height:1.8}
 .victura-footer strong{color:#1e3a8a;font-weight:700}
+/* Reduce font size inside tab content */
+.stTabs [data-testid="stVerticalBlock"] p,
+.stTabs [data-testid="stVerticalBlock"] span,
+.stTabs [data-testid="stVerticalBlock"] label {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    font-weight: 600 !important;
+}
+/* File uploader text wrapping */
+div[data-testid="stFileUploader"] p,
+div[data-testid="stFileUploader"] span {
+    white-space: normal !important;
+    line-height: 1.4 !important;
+}
+
+/* Expander content spacing */
+.stExpander p,
+.stExpander span {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+}
+
+/* Dataframe font fix */
+div[data-testid="stDataFrame"] th,
+div[data-testid="stDataFrame"] td {
+    font-size: 0.9rem !important;
+    white-space: nowrap;
+}
+
+/* Metric spacing fix */
+.stMetric label {
+    font-size: 0.9rem !important;
+}
+.stMetric div[data-testid="stMetricValue"] {
+    font-size: 1.4rem !important;
+}
+
+</style>""", unsafe_allow_html=True)
 </style>""", unsafe_allow_html=True)
 
 LOGO_PATH = "victura_logo.png"
@@ -761,6 +799,7 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
 
