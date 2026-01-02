@@ -435,10 +435,6 @@ st.markdown('''<div class="victura-header">
 with st.sidebar:
     st.header("📁 Risk Master Data")
 
-    # 🔍 STEP 3: DEBUG (temporary)
-    st.write("📁 Logo path:", LOGO_PATH)
-    st.write("✅ Exists:", os.path.exists(LOGO_PATH))
-
     # 🖼 STEP 4: SHOW LOGO
     if os.path.exists(LOGO_PATH):
         st.success("✅ Company Logo Loaded")
@@ -767,5 +763,6 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
