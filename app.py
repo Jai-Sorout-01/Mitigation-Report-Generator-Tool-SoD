@@ -24,11 +24,11 @@ div[data-testid="stFileUploader"] p,
 section[data-testid="stFileUploadDropzone"],
 section[data-testid="stFileUploadDropzone"] span,
 section[data-testid="stFileUploadDropzone"] small,
-[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p{color:#000000!important;font-weight:800!important;font-size:1.15rem!important}
-div[data-testid="stFileUploader"] small{color:#1e3a8a!important;font-weight:600!important}
+[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p{color:#000000!important;font-weight:700!important;font-size:0.9rem!important}
+div[data-testid="stFileUploader"] small{color:#1e3a8a!important;font-weight:600!important;font-size:0.75rem!important}
 section[data-testid="stSidebar"] div[data-testid="stFileUploader"] *{color:#000000!important}
 section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] *{color:#000000!important}
-.uploadedFileName{color:#000000!important;font-weight:700!important}
+.uploadedFileName{color:#000000!important;font-weight:600!important;font-size:0.9rem!important}
 .stTabs [data-baseweb="tab-list"]{gap:1.5rem;background:white;padding:1.8rem;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15)}
 .stTabs [data-baseweb="tab"]{height:60px;background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:white;border-radius:12px;padding:0 3rem;font-weight:700;font-size:17px;transition:all 0.3s;text-transform:uppercase;letter-spacing:1px}
 .stTabs [data-baseweb="tab"]:hover{background:linear-gradient(135deg,#4c1d95,#7c3aed);transform:translateY(-3px);box-shadow:0 8px 20px rgba(76,29,149,0.4)}
@@ -763,6 +763,7 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
 
