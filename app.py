@@ -61,7 +61,8 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 </style>""", unsafe_allow_html=True)
 
 # Constants
-LOGO_PATH = r"Victura Logo.png"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOGO_PATH = os.path.join(BASE_DIR, "victura_logo.png")
 
 # Core standard columns for matching (unchanged)
 CORE_STANDARD_COLUMNS = {
@@ -433,17 +434,19 @@ st.markdown('''<div class="victura-header">
 # Sidebar (unchanged functionality, small additions)
 with st.sidebar:
     st.header("📁 Risk Master Data")
-    
-    # Logo status
+
+    # 🔍 STEP 3: DEBUG (temporary)
+    st.write("📁 Logo path:", LOGO_PATH)
+    st.write("✅ Exists:", os.path.exists(LOGO_PATH))
+
+    # 🖼 STEP 4: SHOW LOGO
     if os.path.exists(LOGO_PATH):
         st.success("✅ Company Logo Loaded")
-        try:
-            st.image(LOGO_PATH, width=150)
-        except:
-            st.info("Logo path configured")
+        st.image(LOGO_PATH, width=150)
     else:
         st.warning("⚠️ Logo not found at configured path")
         st.code(LOGO_PATH, language="text")
+
     
     risk_file = st.file_uploader("Upload Risk Master Excel", type=['xlsx', 'xls'])
     if risk_file:
@@ -764,4 +767,5 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
