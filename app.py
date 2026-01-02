@@ -34,6 +34,7 @@ section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] *{color:#0
 .stTabs [data-baseweb="tab"]:hover{background:linear-gradient(135deg,#4c1d95,#7c3aed);transform:translateY(-3px);box-shadow:0 8px 20px rgba(76,29,149,0.4)}
 .stTabs [aria-selected="true"]{background:linear-gradient(135deg,#4c1d95,#7c3aed);box-shadow:0 8px 25px rgba(76,29,149,0.5)}
 h1,h2,h3{color:white!important;text-shadow:3px 3px 10px rgba(0,0,0,0.4);font-weight:800}
+.stExpander summary{font-size:0.95rem!important;font-weight:600!important}
 section[data-testid="stSidebar"] h2,section[data-testid="stSidebar"] h3{color:white!important}
 .stTabs [data-testid="stVerticalBlock"] h2{color:#0f172a!important;text-shadow:none!important;background:linear-gradient(135deg,#f8fafc,#e2e8f0);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;border-left:6px solid #1e3a8a}
 .main h1{color:white!important}
@@ -58,6 +59,8 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 .victura-footer h3{color:#0f172a!important;text-shadow:none;font-weight:800}
 .victura-footer ul,.victura-footer ol{color:#334155;line-height:1.8}
 .victura-footer strong{color:#1e3a8a;font-weight:700}
+div[data-testid="stExpander"] summary p{font-size:0.95rem!important;font-weight:600!important}
+div[data-testid="stExpander"] details summary{padding:0.75rem 1rem!important}
 </style>""", unsafe_allow_html=True)
 
 # Constants
@@ -763,6 +766,7 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
 
