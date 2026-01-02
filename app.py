@@ -10,7 +10,7 @@ import os
 
 st.set_page_config(page_title="Victura Technologies - SAP GRC", layout="wide", page_icon="🔐")
 
-# Victura CSS (unchanged - interface colors and design preserved)
+# Victura CSS - FIXED FONT SIZES
 st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 *{font-family:'Inter',sans-serif!important}
@@ -22,19 +22,18 @@ div[data-testid="stFileUploader"] label,
 div[data-testid="stFileUploader"] span,
 div[data-testid="stFileUploader"] p,
 section[data-testid="stFileUploadDropzone"],
-section[data-testid="stFileUploadDropzone"] span,
+section[data-testid="stFileUploadDropzone"] span{color:#000000!important;font-weight:600!important;font-size:0.85rem!important}
 section[data-testid="stFileUploadDropzone"] small,
-[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p{color:#000000!important;font-weight:700!important;font-size:0.9rem!important}
-div[data-testid="stFileUploader"] small{color:#1e3a8a!important;font-weight:600!important;font-size:0.75rem!important}
-section[data-testid="stSidebar"] div[data-testid="stFileUploader"] *{color:#000000!important}
-section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] *{color:#000000!important}
-.uploadedFileName{color:#000000!important;font-weight:600!important;font-size:0.9rem!important}
+[data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] p{color:#000000!important;font-weight:600!important;font-size:0.8rem!important}
+div[data-testid="stFileUploader"] small{color:#1e3a8a!important;font-weight:500!important;font-size:0.75rem!important}
+section[data-testid="stSidebar"] div[data-testid="stFileUploader"] *{color:#000000!important;font-size:0.85rem!important}
+section[data-testid="stSidebar"] [data-testid="stFileUploadDropzone"] *{color:#000000!important;font-size:0.85rem!important}
+.uploadedFileName{color:#000000!important;font-weight:600!important;font-size:0.85rem!important}
 .stTabs [data-baseweb="tab-list"]{gap:1.5rem;background:white;padding:1.8rem;border-radius:15px;box-shadow:0 8px 25px rgba(0,0,0,0.15)}
 .stTabs [data-baseweb="tab"]{height:60px;background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:white;border-radius:12px;padding:0 3rem;font-weight:700;font-size:17px;transition:all 0.3s;text-transform:uppercase;letter-spacing:1px}
 .stTabs [data-baseweb="tab"]:hover{background:linear-gradient(135deg,#4c1d95,#7c3aed);transform:translateY(-3px);box-shadow:0 8px 20px rgba(76,29,149,0.4)}
 .stTabs [aria-selected="true"]{background:linear-gradient(135deg,#4c1d95,#7c3aed);box-shadow:0 8px 25px rgba(76,29,149,0.5)}
 h1,h2,h3{color:white!important;text-shadow:3px 3px 10px rgba(0,0,0,0.4);font-weight:800}
-.stExpander summary{font-size:0.95rem!important;font-weight:600!important}
 section[data-testid="stSidebar"] h2,section[data-testid="stSidebar"] h3{color:white!important}
 .stTabs [data-testid="stVerticalBlock"] h2{color:#0f172a!important;text-shadow:none!important;background:linear-gradient(135deg,#f8fafc,#e2e8f0);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;border-left:6px solid #1e3a8a}
 .main h1{color:white!important}
@@ -59,8 +58,11 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 .victura-footer h3{color:#0f172a!important;text-shadow:none;font-weight:800}
 .victura-footer ul,.victura-footer ol{color:#334155;line-height:1.8}
 .victura-footer strong{color:#1e3a8a;font-weight:700}
-div[data-testid="stExpander"] summary p{font-size:0.95rem!important;font-weight:600!important}
-div[data-testid="stExpander"] details summary{padding:0.75rem 1rem!important}
+div[data-testid="stExpander"] summary{font-size:0.9rem!important;font-weight:600!important;line-height:1.4!important}
+div[data-testid="stExpander"] summary p{font-size:0.9rem!important;font-weight:600!important;margin:0!important}
+div[data-testid="stExpander"] details summary{padding:0.6rem 1rem!important}
+div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p{font-size:0.9rem!important}
+div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] strong{font-size:0.9rem!important}
 </style>""", unsafe_allow_html=True)
 
 # Constants
@@ -639,7 +641,7 @@ with tab2:
                 if unmapped:
                     with st.expander(f"ℹ️ Additional Columns ({len(unmapped)})"):
                         st.write("**These columns don't match standard names but will be included:**")
-                        for col in unmapped[:20]:  # Show first 20
+                        for col in unmapped[:20]:
                             st.write(f"• {col}")
                         if len(unmapped) > 20:
                             st.write(f"... and {len(unmapped)-20} more")
@@ -766,8 +768,3 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
-
-
-
-
-
