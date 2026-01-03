@@ -14,6 +14,8 @@ st.set_page_config(page_title="Victura Technologies - SAP GRC", layout="wide", p
 
 # Replace your existing CSS section (lines 10-72) with this fixed version:
 
+# Replace your existing CSS section (lines 10-72) with this fixed version:
+
 st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 *{font-family:'Inter',sans-serif!important}
@@ -895,6 +897,7 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
 
