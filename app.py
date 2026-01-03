@@ -13,6 +13,8 @@ st.set_page_config(page_title="Victura Technologies - SAP GRC", layout="wide", p
 # Victura CSS - FIXED FONT SIZES
 # Replace your existing CSS section (lines 10-72) with this fixed version:
 
+# Replace your existing CSS section (lines 10-72) with this fixed version:
+
 st.markdown("""<style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 *{font-family:'Inter',sans-serif!important}
@@ -65,72 +67,81 @@ section[data-testid="stSidebar"] p{color:#e2e8f0!important}
 div[data-testid="stExpander"]{
     background:white;
     border-radius:10px;
-    margin-bottom:1rem;
+    margin-bottom:1.2rem!important;
     box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 div[data-testid="stExpander"] summary{
-    font-size:0.95rem!important;
+    font-size:0.9rem!important;
     font-weight:600!important;
-    line-height:1.6!important;
-    padding:0.8rem 1rem!important;
-    min-height:45px!important;
+    line-height:1.5!important;
+    padding:1rem 1.2rem!important;
+    min-height:50px!important;
+    display:flex!important;
+    align-items:center!important;
 }
 div[data-testid="stExpander"] summary p{
-    font-size:0.95rem!important;
+    font-size:0.9rem!important;
     font-weight:600!important;
     margin:0!important;
-    line-height:1.6!important;
+    padding:0!important;
+    line-height:1.5!important;
 }
 div[data-testid="stExpander"] details summary{
-    padding:0.8rem 1rem!important;
+    padding:1rem 1.2rem!important;
+}
+div[data-testid="stExpander"] summary svg{
+    margin-right:0.5rem!important;
 }
 div[data-testid="stExpander"] [data-testid="stMarkdownContainer"]{
-    padding:1rem!important;
+    padding:1.2rem!important;
     line-height:1.8!important;
 }
 div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] p{
-    font-size:0.9rem!important;
+    font-size:0.88rem!important;
     line-height:1.8!important;
-    margin-bottom:0.6rem!important;
+    margin-bottom:0.8rem!important;
+    padding:0.2rem 0!important;
 }
 div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] strong{
-    font-size:0.9rem!important;
+    font-size:0.88rem!important;
     font-weight:600!important;
     color:#1e3a8a!important;
+    display:inline-block!important;
+    margin-right:0.3rem!important;
 }
 div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] ul,
 div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] ol{
-    margin:0.5rem 0!important;
-    padding-left:1.5rem!important;
+    margin:0.8rem 0!important;
+    padding-left:1.8rem!important;
 }
 div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] li{
-    font-size:0.88rem!important;
-    line-height:1.7!important;
-    margin-bottom:0.5rem!important;
-    padding:0.2rem 0!important;
+    font-size:0.86rem!important;
+    line-height:1.8!important;
+    margin-bottom:0.6rem!important;
+    padding:0.3rem 0!important;
 }
 
 /* Success/Info/Warning boxes inside expanders */
 div[data-testid="stExpander"] .stSuccess,
 div[data-testid="stExpander"] .stInfo,
 div[data-testid="stExpander"] .stWarning{
-    padding:0.6rem 1rem!important;
-    margin:0.5rem 0!important;
+    padding:0.8rem 1.2rem!important;
+    margin:0.8rem 0!important;
     border-radius:8px!important;
-    font-size:0.88rem!important;
-    line-height:1.6!important;
+    font-size:0.86rem!important;
+    line-height:1.7!important;
 }
 div[data-testid="stExpander"] .stSuccess p,
 div[data-testid="stExpander"] .stInfo p,
 div[data-testid="stExpander"] .stWarning p{
-    font-size:0.88rem!important;
-    line-height:1.6!important;
-    margin:0.3rem 0!important;
+    font-size:0.86rem!important;
+    line-height:1.7!important;
+    margin:0.4rem 0!important;
 }
 
 /* Column headers in expanders */
 div[data-testid="stExpander"] .element-container{
-    margin-bottom:0.8rem!important;
+    margin-bottom:1rem!important;
 }
 
 /* Dataframe styling */
@@ -856,5 +867,6 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
