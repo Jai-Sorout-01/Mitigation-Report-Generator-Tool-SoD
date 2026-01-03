@@ -10,8 +10,7 @@ import os
 
 st.set_page_config(page_title="Victura Technologies - SAP GRC", layout="wide", page_icon="🔐")
 
-# Victura CSS - FIXED FONT SIZES
-# Replace your existing CSS section (lines 10-72) with this fixed version:
+# Victura CSS
 
 # Replace your existing CSS section (lines 10-72) with this fixed version:
 
@@ -78,6 +77,7 @@ div[data-testid="stExpander"] summary{
     min-height:50px!important;
     display:flex!important;
     align-items:center!important;
+    position:relative!important;
 }
 div[data-testid="stExpander"] summary p{
     font-size:0.9rem!important;
@@ -91,6 +91,34 @@ div[data-testid="stExpander"] details summary{
 }
 div[data-testid="stExpander"] summary svg{
     margin-right:0.5rem!important;
+}
+/* Hide the keyboard_arrow_right text that appears */
+div[data-testid="stExpander"] summary span[data-testid="stMarkdownContainer"]{
+    display:inline-block!important;
+    vertical-align:middle!important;
+}
+div[data-testid="stExpander"] summary::before{
+    content:''!important;
+}
+/* Target and hide the arrow text specifically */
+div[data-testid="stExpander"] details > summary > div:first-child{
+    display:none!important;
+}
+div[data-testid="stExpander"] details summary div[class*="streamlitMarkdown"]{
+    width:100%!important;
+}
+div[data-testid="stExpander"] summary > div[data-testid="stMarkdownContainer"]{
+    flex:1!important;
+    overflow:hidden!important;
+}
+/* Force hide any text nodes containing keyboard_arrow */
+div[data-testid="stExpander"] summary *:not(p):not(strong):not(em){
+    font-size:0!important;
+}
+div[data-testid="stExpander"] summary p,
+div[data-testid="stExpander"] summary strong,
+div[data-testid="stExpander"] summary em{
+    font-size:0.9rem!important;
 }
 div[data-testid="stExpander"] [data-testid="stMarkdownContainer"]{
     padding:1.2rem!important;
@@ -867,6 +895,8 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
+
 
 
 
