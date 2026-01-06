@@ -36,6 +36,8 @@ h1,h2,h3{color:white!important;text-shadow:3px 3px 10px rgba(0,0,0,0.4);font-wei
 section[data-testid="stSidebar"] h2,section[data-testid="stSidebar"] h3{color:white!important}
 .stTabs [data-testid="stVerticalBlock"] h2{color:#0f172a!important;text-shadow:none!important;background:linear-gradient(135deg,#f8fafc,#e2e8f0);padding:1.5rem;border-radius:12px;margin-bottom:1.5rem;border-left:6px solid #1e3a8a}
 .main h1{color:white!important}
+/* Fix subheader color in tabs */
+.stTabs [data-testid="stVerticalBlock"] h3{color:#0f172a!important;text-shadow:none!important;font-weight:700;padding:0.8rem 0;margin-top:1.5rem}
 .stButton button{background:linear-gradient(135deg,#4c1d95,#7c3aed);color:white;font-weight:700;padding:1rem 3rem;border-radius:12px;box-shadow:0 8px 20px rgba(76,29,149,0.4);font-size:17px;text-transform:uppercase;letter-spacing:1.5px;transition:all 0.3s}
 .stButton button:hover{background:linear-gradient(135deg,#6d28d9,#8b5cf6);transform:translateY(-4px);box-shadow:0 12px 30px rgba(76,29,149,0.5)}
 .victura-header{background:linear-gradient(135deg,#fff,#f1f5f9);padding:3rem;border-radius:25px;box-shadow:0 15px 40px rgba(0,0,0,0.2);margin-bottom:2.5rem;border:4px solid #1e3a8a;position:relative;overflow:hidden}
@@ -74,6 +76,7 @@ div[data-testid="stExpander"] summary{
     display:flex!important;
     align-items:center!important;
     position:relative!important;
+    color:#1e3a8a!important;
 }
 div[data-testid="stExpander"] summary p{
     font-size:0.9rem!important;
@@ -81,6 +84,7 @@ div[data-testid="stExpander"] summary p{
     margin:0!important;
     padding:0!important;
     line-height:1.5!important;
+    color:#1e3a8a!important;
 }
 div[data-testid="stExpander"] details summary{
     padding:1rem 1.2rem!important;
@@ -891,6 +895,7 @@ st.markdown("""<div class="victura-footer">
 <small style="color:#64748b">Enterprise SAP GRC Solutions | Version 2.5 Enhanced</small>
 </div>
 </div>""", unsafe_allow_html=True)
+
 
 
 
